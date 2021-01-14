@@ -1,8 +1,14 @@
-const express = require('express');
-const app = express();
+const { MONGO_URI, PORT } = require('./config');
+const app = require('./app/app');
+const mongoose = require('mongoose');
 
-app.get('/', function(req, res){
-    res.send('Hello word');
-});
-
-app.listen(3000);
+mongoose.connect(MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true
+})
+.then( resp => app.listen( PORT, () => {
+    console.log(`Servidor corriendo en el puerto ${ PORT }`);
+}))
+.catch( console.log );
