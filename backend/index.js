@@ -1,6 +1,15 @@
 const { MONGO_URI, PORT } = require('./config');
-const app = require('./app/app');
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+
+
+app.use(bodyParser.urlencoded({ extended: false }));
+// parse application/json
+app.use(bodyParser.json());
+
+app.use(require('./routes/index'));
 
 mongoose.connect(MONGO_URI, {
     useNewUrlParser: true,
