@@ -1,15 +1,18 @@
-const Payment = require('../models/payment.model');
+import { Request, Response } from "express";
+import { Payment, IPayment } from '../models/payment.model';
 
-function createPayment ( req, res ) {
+export function getPayments ( req: Request, res: Response) {
 
-    let limit = 10;
+    let limit = req.query.limit || 10;
     let from = req.query.from || 0;
+    limit = Number(limit);
     from = Number(from);
 
     Payment.find({})
+            .sort({ createdAt: 'desc' })
             .limit(limit)
             .skip(from)
-            .exec( (err, payments) => {
+            .exec( (err: any, payments: IPayment) => {
 
                 if(err){
                     return res.status(400).json({
@@ -18,7 +21,7 @@ function createPayment ( req, res ) {
                     })
                 }
                 
-                Payment.count({}, (err, total) => {
+                Payment.count({}, (err: any, total: number) => {
                     res.json({
                         ok: true,
                         payments,
@@ -28,7 +31,7 @@ function createPayment ( req, res ) {
             })
 }
 
-function getPayments (req, res) {
+export function createPayment (req: Request, res: Response) {
 
     let body = req.body;
 
@@ -40,7 +43,7 @@ function getPayments (req, res) {
         providerId: body.providerId,
     });
 
-    payment.save( (err, paymentDB) => {
+    payment.save( (err: any, paymentDB: any) => {
 
         if(err){
             return res.status(400).json({
@@ -51,7 +54,7 @@ function getPayments (req, res) {
 
         res.json({
             ok: true,
-            payment: paymentDB,
+            payment: paymentDB as IPayment,
         })
 
     })
@@ -59,7 +62,3 @@ function getPayments (req, res) {
     
 }
 
-module.exports = {
-    getPayments,
-    createPayment
-}

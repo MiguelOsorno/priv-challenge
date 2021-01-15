@@ -1,15 +1,17 @@
-const { MONGO_URI, PORT } = require('./config');
-const express = require('express');
+
+import { MONGO_URI, PORT } from './config';
+import express from 'express';
+import bodyParser from 'body-parser';
+import mongoose from 'mongoose';
+import router from './routes';
 const app = express();
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
-app.use( require('./routes') );
+app.use(router);
 
 mongoose.connect(MONGO_URI, {
     useNewUrlParser: true,
@@ -17,7 +19,7 @@ mongoose.connect(MONGO_URI, {
     useFindAndModify: false,
     useCreateIndex: true
 })
-.then( resp => app.listen( PORT, () => {
+.then( () => app.listen( PORT, () => {
     console.log(`Servidor corriendo en el puerto ${ PORT }`);
 }))
 .catch( console.log );
