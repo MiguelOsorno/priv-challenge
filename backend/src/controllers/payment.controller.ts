@@ -6,9 +6,6 @@ export function getPayments ( req: Request, res: Response) {
     let limit = req.query.limit || 10;
     let from = req.query.from || 0;
 
-    // limit = Number(limit);
-    // from = Number(from);
-
     Payment.find({})
             .sort({ createdAt: 'desc' })
             .limit(limit)

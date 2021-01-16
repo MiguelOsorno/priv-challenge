@@ -110,7 +110,7 @@
           "type": "string"
         },
         "createdAt": {
-          "type": "datatime"
+          "type": "string"
         }
       }
     }
