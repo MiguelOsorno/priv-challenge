@@ -1,0 +1,118 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "",
+    "version": "1.0.0",
+    "title": "Priv API",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/api/v1",
+  "schemes": ["http", "https"],
+  "paths": {
+    "/payments": {
+      "get": {
+        "tags": ["Payment"],
+        "summary": "Get all payments",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "from",
+            "type": "number",
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "limit",
+            "type": "number",
+            "in": "query",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Payment"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Payment"],
+        "summary": "Create a new payment",
+        "description": "",
+        "consumes":["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Nuevo payment",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Payment"
+            }
+          }
+        ],        
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Payment"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid tag value"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Payment": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "creatorId": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "amountCurrencyCode": {
+          "type": "string"
+        },
+        "amountValue": {
+          "type": "number"
+        },
+        "status": {
+          "type": "string"
+        },
+        "provider": {
+          "type": "string"
+        },
+        "providerId": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "datatime"
+        }
+      }
+    }
+  }
+}
