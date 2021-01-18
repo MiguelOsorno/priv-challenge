@@ -30,15 +30,13 @@ export const CreatePayment = () => {
         })
         createPayment({ kind, amountValue, provider, creatorId, providerId: 535435435 })
                     .then( resp => {
-                        console.log(resp);
                         setPaymentStatus({
                             statusCode: resp.status,
                             loading: false,
                         });
                     })
                     .catch( err => {
-
-                        console.log(err);
+                        
                         setPaymentStatus({
                             statusCode: 500,
                             loading: false,
