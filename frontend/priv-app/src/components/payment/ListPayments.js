@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { getPayments } from '../../helpers/fetchPayment';
 import { PaginationPayments } from './PaginationPayments';
 import { PaymentsTable } from './PaymentsTable';
 
 export const ListPayments = () => {
 
+    const isMounted = useRef(true);
     const [payments, setPayments] = useState([]);
     const [ loading, setLoading ] = useState(true);
     const [ totalPages, setTotalPages] = useState(0);
@@ -28,17 +29,25 @@ export const ListPayments = () => {
     }
 
     useEffect(() => {
+        return () => {
+            isMounted.current = false;
+        }
+    }, [])
+
+    useEffect(() => {
         setLoading( true );
         getPayments(from)
             .then( resp => {
-                console.log(resp);
-                setLoading(false);
-                setPayments( resp.payments );
-                calTotalPages( resp.total );
+                if( isMounted.current ){
+                    setLoading(false);
+                    setPayments( resp.payments );
+                    calTotalPages( resp.total );
+                }
             })
             .catch( err => {
-                console.log(err);
-                setLoading(false);
+                if( isMounted.current ){
+                    setLoading(false);
+                }
             })
     }, [from])
 
