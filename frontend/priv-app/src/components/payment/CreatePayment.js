@@ -13,6 +13,8 @@ export const CreatePayment = () => {
         loading: false
     });
 
+    const [ errorsForm , setErrorsForm] = useState({ amountValueError: false })
+
     const [ values, handleInputChange ] = useForm({
         kind: 'SUBSCRIPTION',
         amountValue: 0,
@@ -24,10 +26,23 @@ export const CreatePayment = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        if( amountValue < 1 || amountValue === '' ){
+            setErrorsForm({
+                amountValueError: true
+            })
+            return;
+        }else{
+            setErrorsForm({
+                amountValueError: false
+            })
+        }
+
         setPaymentStatus({
             statusCode: 0,
             loading: true,
         })
+
         createPayment({ kind, amountValue, provider, creatorId, providerId: 535435435 })
                     .then( resp => {
                         setPaymentStatus({
@@ -70,7 +85,15 @@ export const CreatePayment = () => {
                 </div>
                 <div className='mb-4'>
                     <label className='block text-gray-700 font-bold text-base mb-2'>Amount</label>
-                    <input className='focus:outline-none py-2 px-3 w-full bg-gray-200' type='number' name='amountValue' value={ amountValue } onChange={ handleInputChange } />
+                    <input className={ errorsForm.amountValueError ? 
+                                        'border border-red-500 focus:outline-none py-2 px-3 w-full bg-gray-200' : 
+                                        'focus:outline-none py-2 px-3 w-full bg-gray-200' }  
+                                        type='number' 
+                                        name='amountValue' 
+                                        value={ amountValue } 
+                                        onChange={ handleInputChange } 
+                    />
+                    <p className={ errorsForm.amountValueError ? 'text-red-500 text-xs italic' : 'hidden' }>Ingresa una cantidad valida</p>
                 </div>
                 <div className='mb-4'>
                     <label className='block text-gray-700 font-bold text-base mb-2'>Select Provider</label>
