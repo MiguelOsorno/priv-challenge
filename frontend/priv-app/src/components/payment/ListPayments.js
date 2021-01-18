@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { getPayments } from '../../helpers/fetchPayment';
+import { PaginationPayments } from './PaginationPayments';
+import { PaymentsTable } from './PaymentsTable';
 
 export const ListPayments = () => {
 
     const [payments, setPayments] = useState([]);
+    const [ loading, setLoading ] = useState(true);
     const [ totalPages, setTotalPages] = useState(0);
     const [ from, setFrom] = useState(0);
-    const limit = 10;
     const [ currentPage, setCurrentPage ] = useState(1);
+    const limit = 10;
 
     const handleNextPage = () => {
         setFrom( from + limit );
@@ -25,55 +28,53 @@ export const ListPayments = () => {
     }
 
     useEffect(() => {
+        setLoading( true );
         getPayments(from)
             .then( resp => {
-                console.log( resp.total );
+                console.log(resp);
+                setLoading(false);
                 setPayments( resp.payments );
                 calTotalPages( resp.total );
+            })
+            .catch( err => {
+                console.log(err);
+                setLoading(false);
             })
     }, [from])
 
     return (
         <div>
             <h2 className='text-3xl font-semibold mb-4'>List payments</h2>
-            <table className="table-auto">
-                <thead>
-                    <tr>
-                        <th>amountValue</th>
-                        <th>kind</th>
-                        <th>provider</th>
-                        <th>status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        payments.map( payment => (
-                            <tr key={ payment._id } className="bg-purple-400 ">
-                                <td className='text-white text-center px-4 py-2 border-blue-800 border'>{ payment.amountValue }</td>
-                                <td className='text-white text-center px-4 py-2 border-blue-800 border'>{ payment.kind }</td>
-                                <td className='text-white text-center px-4 py-2 border-blue-800 border'>{ payment.provider }</td>
-                                <td className='text-white text-center px-4 py-2 border-blue-800 border'>{ payment.status }</td>
-                            </tr>
-                        ))
-                    }
-                </tbody>
-            </table>
-            <div>
-                <button
-                    onClick={ handlePrevPage }
-                    disabled={ currentPage === 1 } 
-                    className={ ( currentPage === 1 ) ? 'bg-blue-500 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'} 
-                    type="button">
-                    Anterior
-                </button>
-                <button 
-                    onClick={ handleNextPage }
-                    disabled={ currentPage === totalPages }
-                    className={ ( currentPage === totalPages ) ? 'bg-blue-500 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'} 
-                    type="button">
-                    Siguiente
-                </button>
-            </div>
+            {
+                ( loading && 
+                    <div className="flex items-center bg-blue-500 text-white text-sm font-bold px-4 py-3" role="alert">
+                        <i className='ml-1 animate-spin fas fa-spinner'></i><p> Cargando...</p>
+                    </div>
+                )   
+            } 
+            {
+                ( !loading && payments.length === 0 &&
+                    <div className="bg-yellow-200 border-l-4 border-yellow-500 text-orange-700 p-4" role="alert">
+                        <p className="font-bold">Not payments found</p>
+                        <p>try creating one.</p>
+                    </div>    
+                )
+            }
+            {
+                ( (!loading && payments.length > 0 ) &&   
+                   <>
+                        <PaymentsTable  payments={ payments } />  
+                        <PaginationPayments 
+                            totalPages={ totalPages }
+                            handleNextPage={ handleNextPage }
+                            handlePrevPage={ handlePrevPage }
+                            currentPage={ currentPage }
+                        /> 
+                   </>
+                    
+                )
+            }
+
         </div>
     )
 }

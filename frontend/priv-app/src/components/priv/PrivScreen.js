@@ -16,11 +16,13 @@ export const PrivScreen = () => {
                 <Sidebar />
 
                 <div className='w-full bg-gray-100 p-4 overflow-y-auto'>
-                    <Switch>
-                        <Route path='/' exact component={ InitialMessage } />
-                        <Route path='/payment' exact component={ CreatePayment } />
-                        <Route path='/payments' exact component={ ListPayments } />
-                    </Switch>
+                    <div className='shadow bg-white px-8 py-6'>
+                        <Switch>
+                            <Route path='/' exact component={ InitialMessage } />
+                            <Route path='/payment' exact component={ CreatePayment } />
+                            <Route path='/payments' exact component={ ListPayments } />
+                        </Switch>
+                    </div>
                 </div>
 
                 <Footer />

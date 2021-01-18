@@ -50,8 +50,8 @@ export const CreatePayment = () => {
             <h2 className='text-3xl font-semibold mb-4'>Create a new payment</h2>
             <form onSubmit={ handleSubmit }>
                 <div className='mb-4'>
-                    <label className='block'>Select Creator</label>
-                    <select className='focus:outline-none py-2 px-3 w-full' value={ creatorId } onChange={ handleInputChange } name="creatorId">
+                    <label className='block text-gray-700 font-bold text-base mb-2'>Select Creator</label>
+                    <select className='focus:outline-none py-2 px-3 w-full bg-gray-200' value={ creatorId } onChange={ handleInputChange } name="creatorId">
                         {
                             creators.map( creator => (
                                 <option key={ creator.creatorId } value={ creator.creatorId }>{ creator.name }</option>
@@ -60,8 +60,8 @@ export const CreatePayment = () => {
                     </select>
                 </div>
                 <div className='mb-4'>
-                    <label className='block'>Select Kind</label>
-                    <select className='focus:outline-none py-2 px-3 w-full' value={ kind } onChange={ handleInputChange } name="kind">
+                    <label className='block text-gray-700 font-bold text-base mb-2'>Select Kind</label>
+                    <select className='focus:outline-none py-2 px-3 w-full bg-gray-200' value={ kind } onChange={ handleInputChange } name="kind">
                         <option value="SUBSCRIPTION">Subscription</option>
                         <option value="SUBSCRIPTION_RENEW">Subscription renew</option>
                         <option value="TIP">Tip</option>
@@ -69,12 +69,12 @@ export const CreatePayment = () => {
                     </select>
                 </div>
                 <div className='mb-4'>
-                    <label className='block'>Amount</label>
-                    <input className='focus:outline-none py-2 px-3 w-full' type='number' name='amountValue' value={ amountValue } onChange={ handleInputChange } />
+                    <label className='block text-gray-700 font-bold text-base mb-2'>Amount</label>
+                    <input className='focus:outline-none py-2 px-3 w-full bg-gray-200' type='number' name='amountValue' value={ amountValue } onChange={ handleInputChange } />
                 </div>
                 <div className='mb-4'>
-                    <label className='block'>Select Provider</label>
-                    <select className='focus:outline-none py-2 px-3 w-full' value={ provider } onChange={ handleInputChange } name="provider">
+                    <label className='block text-gray-700 font-bold text-base mb-2'>Select Provider</label>
+                    <select className='focus:outline-none py-2 px-3 w-full bg-gray-200' value={ provider } onChange={ handleInputChange } name="provider">
                             <option value="STRIPE">STRIPE</option>
                             <option value="CONEKTA">CONEKTA</option>
                     </select>
@@ -82,7 +82,7 @@ export const CreatePayment = () => {
                 <div className=''>
                     <button 
                         disabled={ paymentStatus.loading }
-                        className="bg-blue-700 w-1/2 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type='submit'>
+                        className={ ( paymentStatus.loading ) ? 'bg-purple-500 w-1/2 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed' : 'bg-purple-600 w-1/2 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'} type='submit'>
                         Enviar 
                         <i className={ paymentStatus.loading ? 'ml-1 animate-spin fas fa-spinner' : '' }></i>
                     </button>
