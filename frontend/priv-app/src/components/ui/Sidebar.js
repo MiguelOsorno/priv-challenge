@@ -3,7 +3,7 @@ import { Logo } from '../logo/Logo'
 
 export const Sidebar = () => {
     return (
-        <aside className='w-72 h-full'>
+        <aside className='sidebar-width h-full box-border p-4'>
             <Logo />
             <p>Aqui va el aside</p>
         </aside>
