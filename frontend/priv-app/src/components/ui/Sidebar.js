@@ -13,7 +13,7 @@ export const Sidebar = () => {
                         to="/payment"
                         activeClassName='text-white'
                     >
-                        <i className="fas fa-plus-circle mr-1"></i> Create a new payment 
+                        <i className="fas fa-plus-circle mr-1"></i>New payment 
                     </NavLink>
                 </li>
                 <li>

@@ -43,7 +43,16 @@ export const CreatePayment = () => {
             loading: true,
         })
 
-        createPayment({ kind, amountValue, provider, creatorId, providerId: 535435435 })
+        let providerId;
+
+        if( provider === 'STRIPE' ){
+            providerId = 55444333
+        }
+        if( provider === 'CONEKTA' ){
+            providerId = 77788881099
+        }
+
+        createPayment({ kind, amountValue, provider, creatorId, providerId })
                     .then( resp => {
                         setPaymentStatus({
                             statusCode: resp.status,
@@ -61,7 +70,7 @@ export const CreatePayment = () => {
 
 
     return (
-        <div className='max-w-md'>
+        <div className='w-full md:max-w-md'>
             <h2 className='text-3xl font-semibold mb-4'>Create a new payment</h2>
             <form onSubmit={ handleSubmit }>
                 <div className='mb-4'>

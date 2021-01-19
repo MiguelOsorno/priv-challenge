@@ -11,6 +11,7 @@ export const ListPayments = () => {
     const [ totalPages, setTotalPages] = useState(0);
     const [ from, setFrom] = useState(0);
     const [ currentPage, setCurrentPage ] = useState(1);
+    const [ totalRecords, setTotalRecords ] = useState(0);
     const limit = 10;
 
     const handleNextPage = () => {
@@ -26,6 +27,7 @@ export const ListPayments = () => {
     const calTotalPages = ( totalPayments ) => {
         const total = Math.ceil(totalPayments / limit);
         setTotalPages( total );
+        setTotalRecords( totalPayments );
     }
 
     useEffect(() => {
@@ -90,6 +92,7 @@ export const ListPayments = () => {
                             handleNextPage={ handleNextPage }
                             handlePrevPage={ handlePrevPage }
                             currentPage={ currentPage }
+                            totalRecords={ totalRecords }
                         /> 
                      )
                 }
