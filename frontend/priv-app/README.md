@@ -3,13 +3,13 @@
 
 Aplication web to create and list new payments.
 
-## Installation
+## Install
 
 ```bash
 npm install
 ```
 
-## Ejecution
+## Run
 
 ```bash
 npm start

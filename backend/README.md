@@ -3,7 +3,7 @@
 
 API to create and list new payments.
 
-## Installation
+## Install
 
 node version 14.15.4
 
@@ -11,7 +11,7 @@ node version 14.15.4
 npm install
 ```
 
-## Ejecution
+## Run
 
 ```bash
 npm run dev
@@ -19,13 +19,13 @@ npm run dev
 
 ## Documentation mode dev
 
-**you need start the server**
+> you need start the server
 
 [Api-docs](http://localhost:4000/api-docs)
 
 ## Run test
 
-**you need start the server**
+> you need start the server
 
 ```bash
 npm run test
