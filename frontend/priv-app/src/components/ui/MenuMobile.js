@@ -1,19 +1,17 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Logo } from '../logo/Logo';
 
-export const Sidebar = () => {
+export const MenuMobile = () => {
     return (
-        <aside className='hidden lg:block sidebar-width h-full box-border p-4'>
-            <Logo />
-            <ul className='list-none text-gray-300'>
+        <div className='block lg:hidden bg-gray-900 h-16 w-full flex justify-evenly items-center fixed bottom-0'>
+            <ul className='list-none text-gray-300 h-full w-full flex justify-evenly items-center items-center mx-20'>
                 <li>
                     <NavLink 
                         className='font-bold text-base' 
                         to="/payment"
                         activeClassName='text-white'
                     >
-                        <i className="fas fa-plus-circle mr-1"></i> Create a new payment 
+                        <i className="fas fa-plus-circle fa-3x"></i>
                     </NavLink>
                 </li>
                 <li>
@@ -22,10 +20,10 @@ export const Sidebar = () => {
                         to="/payments"
                         activeClassName='text-white'    
                     >
-                        <i className="fas fa-list-alt mr-1"></i> List payments
+                        <i className="fas fa-list-alt fa-3x mr-1"></i>
                     </NavLink>
                 </li>
             </ul>
-        </aside>
+        </div>
     )
 }

@@ -2,7 +2,7 @@ import React from 'react'
 
 export const PaginationPayments = ({ currentPage, totalPages, handlePrevPage, handleNextPage  }) => {
     return (
-        <div className='flex items-center justify-end mt-6'>
+        <div className='flex items-center justify-end mt-6 w-full'>
             <button
                 onClick={ handlePrevPage }
                 disabled={ currentPage === 1 } 

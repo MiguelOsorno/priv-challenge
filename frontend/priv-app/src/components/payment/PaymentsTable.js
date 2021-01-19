@@ -5,7 +5,7 @@ import moment from 'moment';
 export const PaymentsTable = ({ payments }) => {
     return (
         <>
-            <table className="table-auto w-full rounded">
+            <table className="table-auto rounded w-full width-800">
                 <thead>
                     <tr className='bg-gray-700'>
                         <th className='text-white font-medium border-gray-500'>createdAt</th>

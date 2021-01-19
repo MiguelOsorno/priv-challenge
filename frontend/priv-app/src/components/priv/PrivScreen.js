@@ -7,11 +7,12 @@ import { Footer } from '../ui/Footer';
 
 import { Sidebar } from '../ui/Sidebar';
 import { InitialMessage } from './InitialMessage';
+import { MenuMobile } from '../ui/MenuMobile';
 
 export const PrivScreen = () => {
     return (
         <>
-            <div className='flex h-screen pb-10 bg-purple-500 bg-opacity-100'>
+            <div className='flex h-screen pb-12 lg:pb-10 bg-purple-500 bg-opacity-100'>
                 
                 <Sidebar />
 
@@ -24,6 +25,8 @@ export const PrivScreen = () => {
                         </Switch>
                     </div>
                 </div>
+
+                <MenuMobile />
 
                 <Footer />
             </div>
