@@ -4,8 +4,8 @@ export const PaginationPayments = ({ currentPage, totalPages, handlePrevPage, ha
     return (
         <div className='flex justify-between mt-6 w-full'>
             <div className='flex items-center justify-between'>
-                <span className='text-gray-700 text-base'>Page <span className='font-bold'>{ currentPage }</span> - { totalPages }</span>
-                <span className='ml-3 text-gray-700 text-base'>Records: <span className='font-bold'>{ totalRecords }</span> </span>
+                <span className='text-gray-700 text-xs sm:text-base'>Page <span className='font-bold'>{ currentPage }</span> - { totalPages }</span>
+                <span className='ml-3 text-gray-700 text-xs sm:text-base'>Records: <span className='font-bold'>{ totalRecords }</span> </span>
             </div>
             <div className='flex items-center justify-end'>
                 <button
